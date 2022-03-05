@@ -1,6 +1,6 @@
-from flask import Flask,render_template,redirect,request
+'''from flask import Flask,render_template,redirect,request
 import warnings
-warnings.filterwarnings('ignore')
+warnings.filterwarnings('ignore')'''
 
 import speech_recognition as sr
 import pyttsx3
@@ -55,7 +55,10 @@ def run_nandini():
         nandini_talks(info)
 
     elif "joke" in command:
-        nandini_talks(pyjokes.get_joke())
+        laugh = pyjokes.get_joke()
+        print(laugh)
+        nandini_talks(laugh)
+     
 
     elif "weather" in command:
         print("kuch bhi")
