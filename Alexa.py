@@ -1,6 +1,6 @@
-'''from flask import Flask,render_template,redirect,request
+from flask import Flask,render_template,redirect,request
 import warnings
-warnings.filterwarnings('ignore')'''
+warnings.filterwarnings('ignore')
 
 import speech_recognition as sr
 import pyttsx3
@@ -10,8 +10,11 @@ import wikipedia
 import pyjokes
 import sys
 import os.path
+import requests, json 
+import os
 
 listener = sr.Recognizer()
+app = Flask("__name__")
 
 def create_file(file_name, write ):
     if os.path.isfile(file_name):
@@ -20,8 +23,6 @@ def create_file(file_name, write ):
     else:
         with open (file_name, 'w+') as f:
             f.write(write)
-
-
 
 def replace (variable, command):
     command = command.replace(variable, "")
@@ -70,8 +71,15 @@ def run_nandini():
         laugh = pyjokes.get_joke()
         print(laugh)
         nandini_talks(laugh)
-     
 
+    elif "send whatsapp message" in command:
+        command = replace("send whatsapp message",command)
+        command = replace("to",command)
+        command = "+91" + command  
+        nandini_talks("Sending message to" + command)
+        print(command)
+        pywhatkit.sendwhatmsg(command, "hello this is automated message", 15, 35)
+     
     elif "weather" in command:
         print("kuch bhi")
 
@@ -86,8 +94,28 @@ def run_nandini():
         write = user_inputs()
         create_file(file_name, write)
 
+    
+
     else:
         nandini_talks("again please")
 
 
-run_nandini()
+
+
+@app.route('/')
+def hello():
+    return render_template("main.html")
+
+@app.route("/home")
+def home():
+    return redirect('/')
+
+@app.route('/',methods=['POST', 'GET'])
+def submit():
+    while True:
+        run_nandini()
+    return render_template("main.html")
+        
+
+if __name__ =="__main__":
+    app.run(debug=True)
