@@ -9,14 +9,26 @@ import datetime
 import wikipedia
 import pyjokes
 import sys
+import os.path
 
 listener = sr.Recognizer()
 
+def create_file(file_name, write ):
+    if os.path.isfile(file_name):
+        with open (file_name, 'w') as f:
+            f.write(write)
+    else:
+        with open (file_name, 'w+') as f:
+            f.write(write)
 
-""" To change to male to female or vice versa --- use getproperty and set it to voices and then using setperoperty we can change it's index"""
 
+
+def replace (variable, command):
+    command = command.replace(variable, "")
+    return command
 
 def nandini_talks(text):
+    """ To change to male to female or vice versa --- use getproperty and set it to voices and then using setperoperty we can change it's index"""
     engine = pyttsx3.init()
     engine.say(text)
     engine.runAndWait()
@@ -29,7 +41,7 @@ def user_inputs():       #taking the inputs and storing it in command
             command = listener.recognize_google(voice)
             command = command.lower()
             if "nandini" in command:
-                command = command.replace("nandini" , "")
+                command = replace('nandini',command)
                 print(command)
 
     except:
@@ -40,7 +52,7 @@ def run_nandini():
     command = user_inputs()                   # taking inputs from user
 
     if "play" in command:
-        command = command.replace("play", "")
+        command = replace("play",command)
         pywhatkit.playonyt(command)
         nandini_talks("Playing " + command)    #engine will speak
 
@@ -49,7 +61,7 @@ def run_nandini():
         nandini_talks('the current time now ' + time)  # engine will speak
 
     elif "who is" in command:
-        inp = command.replace("who is", "")
+        inp = replace("who is",command)
         info = wikipedia.summary(inp, 1)
         print(info)
         nandini_talks(info)
@@ -67,8 +79,12 @@ def run_nandini():
         nandini_talks("System shutting down.")
         sys.exit()
 
-    elif "open" in command:
-        print("daalna hai ismai")
+    elif "create" in command:
+        file_name = replace("create",command)
+        nandini_talks("Creating" + file_name)
+        nandini_talks("What you want to write?")
+        write = user_inputs()
+        create_file(file_name, write)
 
     else:
         nandini_talks("again please")
