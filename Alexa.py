@@ -1,6 +1,6 @@
-from flask import Flask,render_template,redirect,request
+"""from flask import Flask,render_template,redirect,request
 import warnings
-warnings.filterwarnings('ignore')
+warnings.filterwarnings('ignore')"""
 
 import speech_recognition as sr
 import pyttsx3
@@ -14,7 +14,7 @@ import requests, json
 import os
 
 listener = sr.Recognizer()
-app = Flask("__name__")
+# app = Flask("__name__")
 
 def create_file(file_name, write ):
     if os.path.isfile(file_name):
@@ -76,9 +76,11 @@ def run_nandini():
         command = replace("send whatsapp message",command)
         command = replace("to",command)
         command = "+91" + command  
-        nandini_talks("Sending message to" + command)
+        nandini_talks("Will send message to" + command)
         print(command)
-        pywhatkit.sendwhatmsg(command, "hello this is automated message", 15, 35)
+        nandini_talks("What message you want to send?")
+        message = user_inputs()
+        pywhatkit.sendwhatmsg(command, message , 15, 35)
      
     elif "weather" in command:
         print("kuch bhi")
@@ -94,14 +96,21 @@ def run_nandini():
         write = user_inputs()
         create_file(file_name, write)
 
-    
+    elif "pallindrome" in command or "palindrome" in command:
+        name = replace("a", command)
+        name = replace("palindrome", command)
+        name = replace("is", command)
+        temp = name.find(name[::-1])
+        if temp:
+            nandini_talks(name + "is a palindrome")
+            print(name)
 
     else:
         nandini_talks("again please")
 
+run_nandini()
 
-
-
+"""
 @app.route('/')
 def hello():
     return render_template("main.html")
@@ -118,4 +127,4 @@ def submit():
         
 
 if __name__ =="__main__":
-    app.run(debug=True)
+    app.run(debug=True)"""
