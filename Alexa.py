@@ -12,6 +12,8 @@ import sys
 import os.path
 import requests, json 
 import os
+import tkinter
+from tkinter import *
 
 listener = sr.Recognizer()
 # app = Flask("__name__")
@@ -108,7 +110,7 @@ def run_nandini():
     else:
         nandini_talks("again please")
 
-run_nandini()
+
 
 """
 @app.route('/')
@@ -128,3 +130,14 @@ def submit():
 
 if __name__ =="__main__":
     app.run(debug=True)"""
+
+
+
+window = tkinter.Tk()
+window.title("this is alexa aap")
+
+buton = tkinter.Button(window, text= "click me")
+buton.bind("<Button-1>", run_nandini())
+buton.pack()
+
+window.mainloop()
