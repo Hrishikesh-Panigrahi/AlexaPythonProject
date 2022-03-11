@@ -13,6 +13,8 @@ import os.path
 import requests, json 
 import os
 import tkinter
+#import tkMessageBox
+from tkinter import messagebox as mbox
 from tkinter import *
 
 listener = sr.Recognizer()
@@ -30,8 +32,12 @@ def replace (variable, command):
     command = command.replace(variable, "")
     return command
 
+def messageBox(command):
+    mbox.showinfo( "Your command", command)
+
+
 def nandini_talks(text):
-    """ To change to male to female or vice versa --- use getproperty and set it to voices and then using setperoperty we can change it's index"""
+    #To change to male to female or vice versa --- use getproperty and set it to voices and then using setperoperty we can change it's index"""
     engine = pyttsx3.init()
     engine.say(text)
     engine.runAndWait()
@@ -43,9 +49,11 @@ def user_inputs():       #taking the inputs and storing it in command
             voice = listener.listen(source)
             command = listener.recognize_google(voice)
             command = command.lower()
+            messageBox(command)
             if "nandini" in command:
                 command = replace('nandini',command)
                 print(command)
+                
 
     except:
         pass
@@ -107,6 +115,15 @@ def run_nandini():
             nandini_talks(name + "is a palindrome")
             print(name)
 
+    elif "add two numbers" in command:
+        nandini_talks("enter number one you want to add?")
+        number1= int(user_inputs())
+        nandini_talks("enter number two you want to add?")
+        number2= int(user_inputs())
+        sumuation = str (number2 + number1)
+        nandini_talks("sum is " + sumuation)
+        
+
     else:
         nandini_talks("again please")
 
@@ -131,13 +148,9 @@ def submit():
 if __name__ =="__main__":
     app.run(debug=True)"""
 
+top = tkinter.Tk()
 
+B = tkinter.Button(top, text ="CLick me", command = run_nandini)
 
-window = tkinter.Tk()
-window.title("this is alexa aap")
-
-buton = tkinter.Button(window, text= "click me")
-buton.bind("<Button-1>", run_nandini())
-buton.pack()
-
-window.mainloop()
+B.pack()
+top.mainloop()
