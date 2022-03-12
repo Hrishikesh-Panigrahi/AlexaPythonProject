@@ -121,7 +121,39 @@ def run_nandini():
         nandini_talks("enter number two you want to add?")
         number2= int(user_inputs())
         sumuation = str (number2 + number1)
-        nandini_talks("sum is " + sumuation)
+        nandini_talks(" sum is " + sumuation)
+    
+    elif "subtract two numbers" in command:
+        nandini_talks("enter number one you want to subtract?")
+        number1= int(user_inputs())
+        nandini_talks("enter number two you want to subtract?")
+        number2= int(user_inputs())
+        sumuation = str (number2 - number1)
+        nandini_talks(" subtaction is " + sumuation)
+    
+    elif "multiply two numbers" in command:
+        nandini_talks("enter number one you want to multiply?")
+        number1= int(user_inputs())
+        nandini_talks("enter number two you want to multiply?")
+        number2= int(user_inputs())
+        sumuation = str (number2 * number1)
+        nandini_talks(" multiplication is " + sumuation)
+   
+    elif "divide two numbers" in command:
+        nandini_talks("enter number one you want to divide?")
+        number1= int(user_inputs())
+        nandini_talks("enter number two you want to divide?")
+        number2= int(user_inputs())
+        sumuation = str (number2 / number1)
+        nandini_talks(" division is " + sumuation)
+    
+    elif "divide" in command:
+        numbers = replace("divide" , command)
+        numbers = replace("rishi" , command)
+        number =  numbers.split
+        print(number) 
+        # division = str ( numbers[0] / numbers [1] )        
+        # nandini_talks(" division is " + division)
         
 
     else:
@@ -148,9 +180,3 @@ def submit():
 if __name__ =="__main__":
     app.run(debug=True)"""
 
-top = tkinter.Tk()
-
-B = tkinter.Button(top, text ="CLick me", command = run_nandini)
-
-B.pack()
-top.mainloop()
