@@ -12,10 +12,7 @@ import sys
 import os.path
 import requests, json 
 import os
-import tkinter
-#import tkMessageBox
 from tkinter import messagebox as mbox
-from tkinter import *
 
 listener = sr.Recognizer()
 # app = Flask("__name__")
