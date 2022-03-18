@@ -146,11 +146,14 @@ def run_nandini():
     
     elif "divide" in command:
         numbers = replace("divide" , command)
-        numbers = replace("rishi" , command)
+        numbers = replace("and" , command)
         number =  numbers.split()
         print(number) 
         # division = str ( numbers[0] / numbers [1] )        
         # nandini_talks(" division is " + division)
+
+    #elif "" in command:
+
         
 
     else:
