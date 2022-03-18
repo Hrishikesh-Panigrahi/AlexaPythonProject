@@ -13,6 +13,7 @@ import os.path
 import requests, json 
 import os
 from tkinter import messagebox as mbox
+from detectingFace import knowing
 
 listener = sr.Recognizer()
 # app = Flask("__name__")
@@ -152,9 +153,12 @@ def run_nandini():
         # division = str ( numbers[0] / numbers [1] )        
         # nandini_talks(" division is " + division)
 
-    #elif "" in command:
-
-        
+    elif "snapchat" in command:
+        nandini_talks("What filter do you want to apply? ")
+        filter_name = user_inputs()
+        filter_name = filter_name + ".png"
+        nandini_talks("opening snapchat ")
+        knowing(filter_name) 
 
     else:
         nandini_talks("again please")

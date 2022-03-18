@@ -4,7 +4,7 @@ from Alexa import run_nandini
 
 top = tkinter.Tk()
 
-top.geometry("700x500")
+top.geometry("500x500")
 
 micImage = PhotoImage(file='mic.png')  #importing pic to gui
 
